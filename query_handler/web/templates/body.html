@@ -1,0 +1,51 @@
+<script>
+    function showSummary(key){
+        let elem = document.getElementById("#"+key)
+        let summaryTable = elem.getElementsByClassName("card-text")[0]
+        if (summaryTable.style.display !== "none"){
+            summaryTable.style.display = "none";
+            elem.getElementById("#showButton").text = "Show summary"
+        } else {
+            summaryTable.style.display = "block";
+            elem.getElementById("#showButton").text = "Hide summary"
+        }
+    }
+    function showScores(key){
+        let elem = document.getElementById("#"+key)
+        let summaryTable = elem.getElementsByClassName("scores")[0]
+        if (summaryTable.style.display !== "none"){
+            summaryTable.style.display = "none";
+        } else {
+            summaryTable.style.display = "block";
+        }
+    }
+</script>
+<h4 class="card-subtitle mb-2 text-muted">Found {{ results|length }} results for <b><i>"{{ query }}"</i></b>.</h4>
+<div>
+    {% for result in results %}
+    <div id=#{{ result.paper.key }} class="card">
+        <div class="card-body">
+            <a href="{{ result.paper.link }}" target="_blank">
+                <h3 class="card-title">{{ result.paper.title }}</h3>
+            </a>
+            <h4 class="card-subtitle mb-2 text-muted">{{ result.paper.authors|join(', ') }}</h4>
+            <h4 class="card-subtitle mb-2 text-muted">{{ result.paper.source }}({{ result.paper|datetime_format }})</h4>
+            <a class="btn btn-primary" href="{{ result.paper.pdf }}" target="_blank">Open pdf</a>
+            <a class="btn btn-primary" href="{{ result.paper.key|margot_html_format }}" target="_blank">Margot analysis</a>
+            <a class="btn btn-primary" onclick="showSummary('{{ result.paper.key }}');" id="#showButton">Show/Hide summary</a>
+            <a class="btn btn-primary" onclick="showScores('{{ result.paper.key }}');" id="#showButton">Show/Hide scores</a>
+            <br>
+            <br>
+            <div class="scores" style="display: none;">
+            <h4 class="card-subtitle mb-2 text-muted">Correspondance score:{{ result.correspondanceScore|format_score_function }}</h4>
+            <h4 class="card-subtitle mb-2 text-muted">Margot score:{{ result.margotScore|format_score_function }}</h4>
+            </div>
+            <br>
+            <p class="card-text" style="display: none;"><i>{{ result.paper.summary }}</i></p>
+
+        </div>
+    </div>
+    <br>
+    <br>
+    {% endfor %}
+</div>

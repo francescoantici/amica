@@ -55,9 +55,9 @@ La query viene divisa in parole singole, creando una lista di keywords $k$.
 
 La funzione di ranking è definita nel file ```utils/margotSentences/sorting.py```
 Gli articoli vengono ordinati in base ad uno score, assegnato ad ogni paper $p$, ottenuto dalla moltiplicazione di due fattori:
-1. Correspondance score: $\frac{1}{len(p)}\sum_{i=1}^{len(p)}{\sum_{j=1}^{len(k)} \frac{corr(k_j, p_i)}{len(k)}}$.<br>Dove $corr(keyword, sentence)$ = 1 se keyword presente in sentence, 0 se no.
-1. Margot score: $\frac{1}{len(p)} \sum_{i=1}^{len(p)} \max{ \{ CS(p_i), ES(p_i) \} }$.
-<br>Dove $CS(sentence)$ è il claim score della frase assegnato da margot e $ES(sentence)$ è l'evidence score della frase stabilito dalla stessa.
+1. Correspondance score: <a href="https://www.codecogs.com/eqnedit.php?latex=\bg_white&space;\frac{1}{len(p)}\sum_{i=1}^{len(p)}{\sum_{j=1}^{len(k)}&space;\frac{corr(k_j,&space;p_i)}{len(k)}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bg_white&space;\frac{1}{len(p)}\sum_{i=1}^{len(p)}{\sum_{j=1}^{len(k)}&space;\frac{corr(k_j,&space;p_i)}{len(k)}}" title="\frac{1}{len(p)}\sum_{i=1}^{len(p)}{\sum_{j=1}^{len(k)} \frac{corr(k_j, p_i)}{len(k)}}" /></a>.<br>Dove corr(keyword, sentence) = 1 se keyword presente in sentence, 0 se no.
+1. Margot score: <a href="https://www.codecogs.com/eqnedit.php?latex=\bg_white&space;\frac{1}{len(p)}&space;\sum_{i=1}^{len(p)}&space;\max{&space;\{&space;CS(p_i),&space;ES(p_i)&space;\}&space;}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bg_white&space;\frac{1}{len(p)}&space;\sum_{i=1}^{len(p)}&space;\max{&space;\{&space;CS(p_i),&space;ES(p_i)&space;\}&space;}" title="\frac{1}{len(p)} \sum_{i=1}^{len(p)} \max{ \{ CS(p_i), ES(p_i) \} }" /></a>.
+<br>Dove CS(sentence) è il claim score della frase assegnato da margot e ES(sentence) è l'evidence score della frase stabilito dalla stessa.
 
 ### Rendering in html 
 
